@@ -5,6 +5,7 @@ import type { Ref } from 'vue';
 import { createEmptyFormValues, baseFormSchema, firstNameForm } from '@/composables/dynamicForm/useFormFactory';
 
 let baseInputsData = ref(createEmptyFormValues());
+
 let schema = ref(baseFormSchema)
 let currentForm: Ref<'baseForm' | 'firstNameForm'> = ref('baseForm')
 
@@ -19,6 +20,14 @@ watchEffect(() => {
 function switchForm(form: 'baseForm' | 'firstNameForm') {
   currentForm.value = form
 }
+
+function handleSubmit(data: typeof baseInputsData.value) {
+  if (currentForm.value === 'baseForm') {
+    console.log('Do something with the base form data:', data)
+  } else {
+    console.log('Do something with the first name form data:', data)
+  }
+}
 </script>
 
 <template>
@@ -27,7 +36,7 @@ function switchForm(form: 'baseForm' | 'firstNameForm') {
       <button @click="switchForm('baseForm')">Base form</button>
       <button @click="switchForm('firstNameForm')">Only first name form</button>
     </div>
-    <form  class="mt-2">
+    <form class="mt-2" @submit.prevent="handleSubmit(baseInputsData)">
       <div
         v-for="(input, index) in schema"
         :key="`${input.name}-${index}`"
@@ -41,9 +50,9 @@ function switchForm(form: 'baseForm' | 'firstNameForm') {
           v-model="baseInputsData[input.name]"
          />
       </div>
+      <button type="submit" class="mt-2">Submit</button>
     </form>
     <pre class="mt-2">{{ baseInputsData }}</pre>
-    <pre class="mt-2">{{ currentForm }}</pre>
   </main>
 </template>
 
