@@ -17,9 +17,8 @@ const baseFormSchema = [
   inputConfig[LAST_NAME],
 ];
 
-const textSchema = [
+const firstNameForm = [
   inputConfig[FIRST_NAME],
-  inputConfig[LAST_NAME],
 ];
 
-export { createEmptyFormValues, baseFormSchema, textSchema }
+export { createEmptyFormValues, baseFormSchema, firstNameForm }

@@ -1,26 +1,39 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
+import type { Ref } from 'vue';
 
-import { createEmptyFormValues, baseFormSchema } from '@/composables/dynamicForm/useFormFactory';
+import { createEmptyFormValues, baseFormSchema, firstNameForm } from '@/composables/dynamicForm/useFormFactory';
 
 let baseInputsData = ref(createEmptyFormValues());
-let schema = baseFormSchema
+let schema = ref(baseFormSchema)
+let currentForm: Ref<'baseForm' | 'firstNameForm'> = ref('baseForm')
 
-function handleData(data: typeof baseInputsData.value) {
-  console.log(data);
+watchEffect(() => {
+  if (currentForm.value === 'firstNameForm') {
+    schema.value = firstNameForm
+  } else {
+    schema.value = baseFormSchema
+  }
+})
+
+function switchForm(form: 'baseForm' | 'firstNameForm') {
+  currentForm.value = form
 }
 </script>
 
 <template>
   <main>
-    <pre>{{ baseInputsData }}</pre>
-    <form @submit.prevent="handleData(baseInputsData)">
+    <div class="switch-buttons">
+      <button @click="switchForm('baseForm')">Base form</button>
+      <button @click="switchForm('firstNameForm')">Only first name form</button>
+    </div>
+    <form  class="mt-2">
       <div
         v-for="(input, index) in schema"
         :key="`${input.name}-${index}`"
       >
         <label :for="input.name">{{ input.label }}
-          <span v-if="input.required">*</span>
+          <span v-if="input.required" style="color: red">*</span>
         </label>
         <component
           :is="input.component()"
@@ -28,13 +41,18 @@ function handleData(data: typeof baseInputsData.value) {
           v-model="baseInputsData[input.name]"
          />
       </div>
-      <button type="submit">Submit</button>
     </form>
+    <pre class="mt-2">{{ baseInputsData }}</pre>
+    <pre class="mt-2">{{ currentForm }}</pre>
   </main>
 </template>
 
 <style scoped>
-form {
+.mt-2 {
   margin-top: 2rem;
+}
+.switch-buttons {
+  display: flex;
+  gap: 2rem;
 }
 </style>
