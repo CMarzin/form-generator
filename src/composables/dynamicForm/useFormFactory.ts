@@ -12,13 +12,13 @@ function createEmptyFormValues() {
   };
 }
 
-const baseFormSchema = [
+const userNameFormSchema = [
   inputConfig[FIRST_NAME],
   inputConfig[LAST_NAME],
 ];
 
-const firstNameForm = [
+const firstNameFormSchema = [
   inputConfig[FIRST_NAME],
 ];
 
-export { createEmptyFormValues, baseFormSchema, firstNameForm }
+export { createEmptyFormValues, userNameFormSchema, firstNameFormSchema }

@@ -4,7 +4,6 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-
   font-weight: normal;
 }
 
@@ -13,6 +12,19 @@ a,
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
+  padding: .25rem;
+}
+
+.router-link-active {
+  background-color: hsla(160, 100%, 37%, 0.2);
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+.switch-buttons {
+  display: flex;
+  gap: 2rem;
 }
 
 @media (hover: hover) {
@@ -29,7 +41,7 @@ a,
 
   #app {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     padding: 0 2rem;
   }
 }
