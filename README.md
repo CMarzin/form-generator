@@ -1,4 +1,4 @@
-# dynamic-form-generator
+# Generating a form from a static schema with Vuejs
 
 This template should help get you started developing with Vue 3 in Vite.
 

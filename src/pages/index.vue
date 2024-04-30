@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import { createEmptyFormValues, userNameFormSchema } from '@/composables/baseForm/useFormFactory'
 
 let baseInputsData = ref(createEmptyFormValues())
-let schema = ref(userNameFormSchema)
+let schema = userNameFormSchema
 
 function handleSubmit(data: typeof baseInputsData.value) {
     console.table(data)
