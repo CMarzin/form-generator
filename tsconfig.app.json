@@ -1,9 +1,10 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "package.json"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "package.json", "./typed-router.d.ts"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "baseUrl": ".",
+    "moduleResolution": "Bundler",
     "paths": {
       "@/*": ["./src/*"]
     }
